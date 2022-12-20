@@ -12,41 +12,44 @@ class ArticlesApiModel {
     
     var sourceFromArticle: Source? = nil
     
-    init(_ articles: Any?) {
+    init(_ articles: [AnyHashable]) {
         
-        guard let data = articles as? [AnyHashable] else {return}
+//        guard let data = articles as? [AnyHashable] else {return}
         
-        for article in data {
+        for article in articles {
             
             guard let article = article as? [AnyHashable: Any] else {
                 continue
             }
-            
-            let source = article["source"] as? [AnyHashable: Any]
-            
-            self.sourceData(source)
-            
-            
-            
-            //debugPrint(NewAPIKeys.title.rawValue)
-            
-            guard let title = article[NewAPIKeys.title.rawValue] as? String else {continue}
-            guard let author = article[NewAPIKeys.author.rawValue] as? String else {continue}
-            guard let description = article[NewAPIKeys.description.rawValue] as? String else {continue}
-            guard let url = article[NewAPIKeys.url.rawValue] as? String else {continue}
-            guard let urlToImage = article[NewAPIKeys.urlToImage.rawValue] as? String else {continue}
-            guard let publishedAt = article[NewAPIKeys.publishedAt.rawValue] as? String else {continue}
-            guard let content = article[NewAPIKeys.content.rawValue] as? String else {continue}
-
-            //debugPrint(self.source)
-            
-            if let sourceOfArticle = sourceFromArticle {
-                let newArticle = Article(source: sourceOfArticle, author: author, title: title, description: description, url: url, urlToImage: urlToImage, publishedAt: publishedAt, content: content)
-                
-                //debugPrint(newArticle)
-                
-                self.articles.append(newArticle)
+            //debugPrint(article)
+            if let source = article["source"] as? [String: String] {
+                //debugPrint(source)
+                sourceData(source)
             }
+     
+           //debugPrint(article)
+            
+            let newArticle = getArticleObject(article)
+            //debugPrint(newArticle)
+            self.articles.append(newArticle)
+            
+//            guard let title = article[NewAPIKeys.title.rawValue] as? String else {return}
+//            guard let author = article[NewAPIKeys.author.rawValue] as? String else {return ""}
+//            guard let description = article[NewAPIKeys.description.rawValue] as? String else {return ""}
+//            guard let url = article[NewAPIKeys.url.rawValue] as? String else {return ""}
+//            guard let urlToImage = article[NewAPIKeys.urlToImage.rawValue] as? String else {return ""}
+//            guard let publishedAt = article[NewAPIKeys.publishedAt.rawValue] as? String else {return ""}
+//            guard let content = article[NewAPIKeys.content.rawValue] as? String else {return ""}
+
+            //debugPrint(title)
+            
+            
+//            if let sourceOfArticle = sourceFromArticle {
+//                let newArticle = Article(source: sourceOfArticle, author: author, title: title, description: description, url: url, urlToImage: urlToImage, publishedAt: publishedAt, content: content)
+//
+//                debugPrint(newArticle)
+//                self.articles.append(newArticle)
+//            }
         
         }
     }
@@ -57,22 +60,65 @@ class ArticlesApiModel {
 
 
 extension ArticlesApiModel {
-    func sourceData(_ source: Any?) {
+    func sourceData(_ source: [String: String]) {
         
-        guard let data = source as? [AnyHashable: Any] else {return}
+        var sourceId = ""
+        var sourceName = ""
+
+        guard let id = source[NewAPIKeys.id.rawValue] else {return}
+        guard let name = source[NewAPIKeys.name.rawValue] else {return}
         
-//        guard let articleSource = data as? AnyHashable: Any else {
-//            return
-//        }
-        guard let id = data[NewAPIKeys.id.rawValue] as? String else {return}
-        guard let name = data[NewAPIKeys.name.rawValue] as? String else {return}
+        if !id.isEmpty {
+            sourceId = id
+        }
         
-        let newSourceObject = Source(id: id, name: name)
+        if !name.isEmpty {
+            sourceName = name
+        }
         
-        //debugPrint(newSourceObject)
-        
+        let newSourceObject = Source(id: sourceId, name: sourceName)
         self.sourceFromArticle = newSourceObject
-//        debugPrint("Id \(id) and Name \(name)")
+    }
+    
+    func getArticleObject(_ article: [AnyHashable: Any]) -> Article {
+        
+        var newArticle = Article()
+        
+        let title = returnValueUsingKeyFromDict(NewAPIKeys.title.rawValue, article)
+        let author = returnValueUsingKeyFromDict(NewAPIKeys.author.rawValue, article)
+        let description = returnValueUsingKeyFromDict(NewAPIKeys.description.rawValue, article)
+        let url = returnValueUsingKeyFromDict(NewAPIKeys.url.rawValue, article)
+        let urlToImage = returnValueUsingKeyFromDict(NewAPIKeys.urlToImage.rawValue, article)
+        let publishedAt = returnValueUsingKeyFromDict(NewAPIKeys.publishedAt.rawValue, article)
+        let content = returnValueUsingKeyFromDict(NewAPIKeys.content.rawValue, article)
+        
+        
+        
+        if let sourceOfArticle = sourceFromArticle {
+            //newArticle
+            newArticle.source = sourceOfArticle
+            newArticle.author = author
+            newArticle.title = title
+            newArticle.description = description
+            newArticle.url = url
+            newArticle.urlToImage = urlToImage
+            newArticle.publishedAt = publishedAt
+            newArticle.content = content
+           
+        }
+        
+        return newArticle
+        
+    }
+    
+    func returnValueUsingKeyFromDict(_ key: String, _ article: [AnyHashable: Any]) -> String {
+        
+        guard let value = article[key] as? String else {return ""}
+        
+        if value.isEmpty {
+            return ""
+        }
+        return value
     }
 }
 
@@ -89,18 +135,21 @@ enum NewAPIKeys: String {
     case name
 }
 
-struct Article {
-    let source: Source
-    let author: String
-    let title: String
-    let description: String
-    let url: String
-    let urlToImage: String
-    let publishedAt: String
-    let content: String
+class Article {
+    var source: Source? = nil
+    var author: String = ""
+    var title: String = ""
+    var description: String = ""
+    var url: String = ""
+    var urlToImage: String = ""
+    var publishedAt: String = ""
+    var content: String = ""
+    
+    init () {
+    }
 }
 
 struct Source {
-    let id: String
-    let name: String
+    var id: String = ""
+    var name: String = ""
 }

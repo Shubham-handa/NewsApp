@@ -16,7 +16,7 @@ class Fetcher {
     private init() {}
     
     func fetchTopHeadlinesParticularCountry(_ completionHandler: @escaping ([Article]) -> Void) {
-        guard let url = URL.init(string: "\(mainUrl)/top-headlines?country=in&apiKey=\(apiKey)") else {return}
+        guard let url = URL.init(string: "\(mainUrl)/top-headlines?country=us&apiKey=\(apiKey)") else {return}
         
         let urlRequest = URLRequest(url: url)
         
@@ -29,21 +29,12 @@ class Fetcher {
                 
                 let articles = decodeData?["articles"] as? [AnyHashable]
                 
-                //debugPrint(articles)
-                
                 if let data = articles {
                     //debugPrint(data)
                     let apiModel = ArticlesApiModel.init(data)
                     completionHandler(apiModel.articles)
                 }
-                
-                
-                
-                //debugPrint(apiModel.articles)
-                
-                
-                
-                //debugPrint(articles)
+            
             }catch let error {
                 debugPrint(error)
             }
@@ -52,4 +43,6 @@ class Fetcher {
             
         }.resume()
     }
+    
+    
 }

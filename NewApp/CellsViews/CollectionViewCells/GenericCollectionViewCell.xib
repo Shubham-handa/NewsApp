@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GenericCollectionViewCell" id="gTV-IL-0wX" customClass="GenericCollectionViewCell" customModule="NewApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="376" height="333"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="376" height="333"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitcoin" translatesAutoresizingMaskIntoConstraints="NO" id="0eh-1y-3gH">
+                        <rect key="frame" x="0.0" y="0.0" width="376" height="200"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="200" id="GMd-dc-1m1"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Bitcoin Price Slides to Two-Year Low as Fears Persist Over FTX Contagion" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Kh-V5-ZlF">
+                        <rect key="frame" x="10" y="210" width="356" height="82"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paul R. La Monica" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9x-5G-zWR">
+                        <rect key="frame" x="10" y="302" width="356" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.45882352939999999" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="0eh-1y-3gH" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="37f-hw-5mt"/>
+                <constraint firstItem="3Kh-V5-ZlF" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="FkD-jz-zL1"/>
+                <constraint firstItem="m9x-5G-zWR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="PMF-jt-MLa"/>
+                <constraint firstItem="3Kh-V5-ZlF" firstAttribute="top" secondItem="0eh-1y-3gH" secondAttribute="bottom" constant="10" id="Soy-CK-69d"/>
+                <constraint firstAttribute="bottom" secondItem="m9x-5G-zWR" secondAttribute="bottom" constant="10" id="aAL-hQ-GuL"/>
+                <constraint firstAttribute="trailing" secondItem="3Kh-V5-ZlF" secondAttribute="trailing" constant="10" id="fho-XD-jTf"/>
+                <constraint firstAttribute="trailing" secondItem="m9x-5G-zWR" secondAttribute="trailing" constant="10" id="jTn-iO-aHp"/>
+                <constraint firstItem="m9x-5G-zWR" firstAttribute="top" secondItem="3Kh-V5-ZlF" secondAttribute="bottom" constant="10" id="l3R-qS-H9g"/>
+                <constraint firstItem="0eh-1y-3gH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vAJ-fh-9vb"/>
+                <constraint firstAttribute="trailing" secondItem="0eh-1y-3gH" secondAttribute="trailing" id="yUm-iZ-USc"/>
+            </constraints>
+            <size key="customSize" width="376" height="333"/>
+            <connections>
+                <outlet property="newsAuthorLabel" destination="m9x-5G-zWR" id="TDG-59-hpb"/>
+                <outlet property="newsImageView" destination="0eh-1y-3gH" id="Mhh-G7-chK"/>
+                <outlet property="newsTitleLabel" destination="3Kh-V5-ZlF" id="Id5-uZ-xgi"/>
+            </connections>
+            <point key="canvasLocation" x="-114.50381679389312" y="119.36619718309859"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="bitcoin" width="800" height="450"/>
+    </resources>
+</document>

@@ -16,9 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eMY-Iq-2mq">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eMY-Iq-2mq">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -31,6 +30,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NnP-2h-bFA"/>
+                    <connections>
+                        <outlet property="newsDisplayTableView" destination="eMY-Iq-2mq" id="xrg-7y-vss"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -74,7 +76,7 @@
         <!--Search-->
         <scene sceneID="x8g-mF-2Rz">
             <objects>
-                <viewController id="DGC-bN-Kyt" customClass="ViewController" customModule="NewApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DGC-bN-Kyt" customClass="SearchNewsViewController" customModule="NewApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f65-Zi-hCE">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,7 +101,7 @@
         <!--Bookmark-->
         <scene sceneID="XqP-5x-Aq9">
             <objects>
-                <viewController id="I1D-OU-0ht" customClass="ViewController" customModule="NewApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="I1D-OU-0ht" customClass="BookMarkedNewsViewController" customModule="NewApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QLk-a8-o9t">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
