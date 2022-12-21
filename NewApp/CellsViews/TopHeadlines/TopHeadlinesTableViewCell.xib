@@ -27,7 +27,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Yahoo entertainments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Tu-ay-U2b">
-                                <rect key="frame" x="36" y="210" width="317" height="22"/>
+                                <rect key="frame" x="36" y="210" width="220" height="22"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -44,6 +44,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tge-Nz-ixe">
+                                <rect key="frame" x="319" y="210.66666666666666" width="29" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWk-eA-N2E">
+                                <rect key="frame" x="296" y="210.66666666666666" width="20" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
                         <constraints>
@@ -53,12 +65,16 @@
                             <constraint firstItem="CZW-GS-eGX" firstAttribute="top" secondItem="0Tu-ay-U2b" secondAttribute="bottom" constant="10" id="6pv-rr-cPu"/>
                             <constraint firstItem="EFW-H5-h24" firstAttribute="leading" secondItem="e81-US-mh3" secondAttribute="leading" constant="10" id="9xY-50-J4H"/>
                             <constraint firstAttribute="trailing" secondItem="CZW-GS-eGX" secondAttribute="trailing" constant="10" id="Aol-al-MVs"/>
+                            <constraint firstAttribute="trailing" secondItem="tge-Nz-ixe" secondAttribute="trailing" constant="10" id="JKo-5P-CHN"/>
                             <constraint firstItem="Wup-Qn-yvq" firstAttribute="leading" secondItem="e81-US-mh3" secondAttribute="leading" id="MCu-cV-dMD"/>
+                            <constraint firstItem="tge-Nz-ixe" firstAttribute="centerY" secondItem="hWk-eA-N2E" secondAttribute="centerY" id="PnP-T2-0t4"/>
                             <constraint firstAttribute="trailing" secondItem="Wup-Qn-yvq" secondAttribute="trailing" id="Uui-4L-Xxv"/>
                             <constraint firstAttribute="bottom" secondItem="CZW-GS-eGX" secondAttribute="bottom" constant="10" id="Wee-Uo-yKm"/>
+                            <constraint firstItem="tge-Nz-ixe" firstAttribute="leading" secondItem="hWk-eA-N2E" secondAttribute="trailing" constant="3" id="X7r-0z-Y83"/>
                             <constraint firstItem="CZW-GS-eGX" firstAttribute="leading" secondItem="e81-US-mh3" secondAttribute="leading" constant="10" id="Z0F-iU-p3P"/>
+                            <constraint firstItem="hWk-eA-N2E" firstAttribute="centerY" secondItem="0Tu-ay-U2b" secondAttribute="centerY" id="daG-To-Nks"/>
                             <constraint firstItem="0Tu-ay-U2b" firstAttribute="leading" secondItem="EFW-H5-h24" secondAttribute="trailing" constant="3" id="pX7-gQ-c14"/>
-                            <constraint firstAttribute="trailing" secondItem="0Tu-ay-U2b" secondAttribute="trailing" constant="5" id="zzv-OS-tT1"/>
+                            <constraint firstItem="hWk-eA-N2E" firstAttribute="leading" secondItem="0Tu-ay-U2b" secondAttribute="trailing" constant="40" id="pwW-f0-OGC"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -73,6 +89,7 @@
             <connections>
                 <outlet property="cardView" destination="e81-US-mh3" id="2XV-4B-m6I"/>
                 <outlet property="newsImageView" destination="Wup-Qn-yvq" id="A9j-Tk-Grq"/>
+                <outlet property="newsPublishedTime" destination="hWk-eA-N2E" id="ouB-8Q-psW"/>
                 <outlet property="newsTitleLabel" destination="CZW-GS-eGX" id="u4s-dH-v6W"/>
                 <outlet property="sourceLabel" destination="0Tu-ay-U2b" id="yAk-XR-iqF"/>
             </connections>

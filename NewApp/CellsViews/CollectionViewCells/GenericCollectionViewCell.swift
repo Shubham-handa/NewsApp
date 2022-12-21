@@ -12,6 +12,8 @@ class GenericCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var newsAuthorLabel: UILabel!
     @IBOutlet weak var newsTitleLabel: UILabel!
     @IBOutlet weak var newsImageView: UIImageView!
+    
+    @IBOutlet weak var cardView: UIView!
     static let nibName = "GenericCollectionViewCell"
     
     static func getUINib() -> UINib {
@@ -20,6 +22,9 @@ class GenericCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+//        self.cardView.layer.cornerRadius = 50
+//        self.cardView.clipsToBounds = true
+//        newsImageView.clipsToBounds = true
         // Initialization code
     }
     

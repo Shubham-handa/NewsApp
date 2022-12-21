@@ -14,7 +14,7 @@ class TopHeadlinesTableViewCell: UITableViewCell {
     @IBOutlet weak var sourceLabel: UILabel!
     @IBOutlet weak var newsTitleLabel: UILabel!
     @IBOutlet weak var cardView: UIView!
-    
+    @IBOutlet weak var newsPublishedTime: UILabel!
     static let nibName = "TopHeadlinesTableViewCell"
     
     static func getNib() -> UINib {
@@ -41,6 +41,7 @@ class TopHeadlinesTableViewCell: UITableViewCell {
     
     func setUpData(_ article: Article) {
         //debugPrint(article)
+        newsPublishedTime.text = findTime(article.publishedAt)
         sourceLabel.text = article.source?.name
         newsTitleLabel.text = article.title
         newsImageView.sd_setImage(with: URL(string: article.urlToImage), placeholderImage: UIImage(systemName: "slowmo"), options: .continueInBackground, completed: nil)

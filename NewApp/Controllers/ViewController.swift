@@ -20,13 +20,29 @@ class ViewController: UIViewController {
         registerCells()
         //
         registerWebViewDelegate()
+        
+        
+        self.navigationItem.titleView = imageViewTitle()
     }
+    
+    
+    func imageViewTitle() -> UIImageView {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
+        imageView.contentMode = .scaleAspectFill
+        let image = UIImage(named: "bbcNewsIcon1")
+        imageView.image = image
+        navigationItem.titleView = imageView
+        return imageView
+    }
+    
     
     func registerCells() {
         newsDisplayTableView.delegate = self
         newsDisplayTableView.dataSource = self
         newsDisplayTableView.register(TopHeadlinesTableViewCell.getNib(), forCellReuseIdentifier: TopHeadlinesTableViewCell.nibName)
         newsDisplayTableView.register(CategoryWiseTableViewCell.getNib(), forCellReuseIdentifier: CategoryWiseTableViewCell.nibName)
+        newsDisplayTableView.register(CustomHeaderView.getNib(), forHeaderFooterViewReuseIdentifier: CustomHeaderView.nibName)
+        
     }
     
     func setUp(){
@@ -46,9 +62,6 @@ class ViewController: UIViewController {
         }
         
     }
-    
-    
-
 
 //    @IBAction func goToSomeOtherView(_ sender: UIButton) {
 //
@@ -60,7 +73,6 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         var count = 0
         switch section {
         case 0: count = 1
@@ -68,56 +80,44 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             count = 0
         }
-        //debugPrint(count)
        return count
-        
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var height: CGFloat = 400
+        var height: CGFloat = 370
         if indexPath.section == 0{
             height = 400
         }
         return height
-
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //debugPrint(indexPath.section)
         switch indexPath.section {
         case 0:
             guard let bitcoinCell = newsDisplayTableView.dequeueReusableCell(withIdentifier: CategoryWiseTableViewCell.nibName, for: indexPath) as? CategoryWiseTableViewCell else {return UITableViewCell()}
-            
-            //BitcoinCell.setUpData(articlesData[indexPath.row])
-            
             return bitcoinCell
         case 1:
             guard let topHeadlineCell = newsDisplayTableView.dequeueReusableCell(withIdentifier: TopHeadlinesTableViewCell.nibName, for: indexPath) as? TopHeadlinesTableViewCell else {return UITableViewCell()}
-            
             topHeadlineCell.setUpData(articlesData[indexPath.row])
-            
             return topHeadlineCell
         default:
             return UITableViewCell()
         }
-        
-       
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = newsDisplayTableView.dequeueReusableHeaderFooterView(withIdentifier: CustomHeaderView.nibName) as? CustomHeaderView else {return UIView()}
+        switch section {
+        case 0: header.headerLabel.text = "Bitcoin"
+        case 1: header.headerLabel.text = "Top Headlines"
+        default:
+            header.headerLabel.text = "Everything"
+        }
+        return header
     }
 
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var title = ""
-        switch section {
-        case 0: title = "Top Headlines"
-        case 1: title = "Bitcoin"
-        default:
-            title = "Everything"
-        }
-       return title
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -125,17 +125,16 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-}
-
-
-extension ViewController: WKNavigationDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         //openFullDetailOfNews(articlesData[indexPath.row].url)
     }
     
-   
+}
+
+// MARK: WebView
+
+extension ViewController: WKNavigationDelegate {
     
     func registerWebViewDelegate() {
         webView.allowsBackForwardNavigationGestures = true
@@ -150,14 +149,11 @@ extension ViewController: WKNavigationDelegate {
 //        }
         
     }
-    
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         webView.frame = view.bounds
     }
-    
-    
     
 }
 

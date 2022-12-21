@@ -6,5 +6,6 @@ target 'NewApp' do
   use_frameworks!
 
 pod 'SDWebImage'
+pod 'SwiftLint'
 
 end

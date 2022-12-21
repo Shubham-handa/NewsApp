@@ -13,6 +13,7 @@ class CategoryWiseTableViewCell: UITableViewCell {
     
     static let nibName = "CategoryWiseTableViewCell"
     
+    @IBOutlet weak var cardView: UIView!
     static func getNib() -> UINib {
         return UINib(nibName: nibName, bundle: nil)
     }
@@ -23,7 +24,9 @@ class CategoryWiseTableViewCell: UITableViewCell {
         registerCells()
         cwNewsCollectionView.delegate = self
         cwNewsCollectionView.dataSource = self
-        
+        //self.cardView.layer.cornerRadius = 30
+       // self.cwNewsCollectionView.layer.cornerRadius = 30
+
     }
     
     
@@ -53,11 +56,13 @@ extension CategoryWiseTableViewCell: UICollectionViewDelegate, UICollectionViewD
         return cell
     }
     
+
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
                         UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: 400, height: 400) // Collection View size right?
-        
+
+        return CGSize(width: 300, height: 400) // Collection View size right?
+
     }
     
 }
