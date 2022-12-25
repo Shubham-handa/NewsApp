@@ -106,18 +106,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmu-Zn-Z4u">
-                                <rect key="frame" x="175" y="345" width="77" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7It-vQ-g0w">
+                                <rect key="frame" x="0.0" y="59" width="393" height="710"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Xpa-BX-LlK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7It-vQ-g0w" firstAttribute="top" secondItem="Xpa-BX-LlK" secondAttribute="top" id="8qC-RD-nkT"/>
+                            <constraint firstItem="Xpa-BX-LlK" firstAttribute="trailing" secondItem="7It-vQ-g0w" secondAttribute="trailing" id="CSh-Yh-Z5e"/>
+                            <constraint firstItem="7It-vQ-g0w" firstAttribute="leading" secondItem="Xpa-BX-LlK" secondAttribute="leading" id="mHS-ww-shp"/>
+                            <constraint firstItem="Xpa-BX-LlK" firstAttribute="bottom" secondItem="7It-vQ-g0w" secondAttribute="bottom" id="vDd-Xa-gXv"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Bookmark" image="book.fill" catalog="system" id="nBp-Ed-o5k"/>
+                    <connections>
+                        <outlet property="bookMarkedNewsTV" destination="7It-vQ-g0w" id="vrD-0d-Fhy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vyG-QZ-ISD" sceneMemberID="firstResponder"/>
             </objects>

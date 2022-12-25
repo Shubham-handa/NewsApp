@@ -7,5 +7,6 @@ target 'NewApp' do
 
 pod 'SDWebImage'
 pod 'SwiftLint'
+pod 'RealmSwift'
 
 end

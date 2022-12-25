@@ -7,10 +7,12 @@
 
 import UIKit
 import WebKit
+import RealmSwift
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var newsDisplayTableView: UITableView!
+    let realm = try! Realm()
     let webView = WKWebView()
     var articlesData: [Article] = []
 
@@ -129,6 +131,41 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         //openFullDetailOfNews(articlesData[indexPath.row].url)
     }
+    
+}
+
+// MARK: RealmSwift functions
+extension ViewController {
+    func saveNews(_ article: Article) {
+        //Source Object
+        let newSource = SourceDBModel()
+        if let id = article.source?.id, let name = article.source?.name {
+            newSource.id = id
+            newSource.name = name
+        }
+
+        //Article Object
+        let newArticle = ArticleDBModel()
+        newArticle.author = article.author
+        newArticle.source = newSource
+        newArticle.title = article.title
+        newArticle.newsDescription = article.description
+        newArticle.url = article.url
+        newArticle.urlToImage = article.urlToImage
+        newArticle.publishedAt = article.publishedAt
+        newArticle.content = article.content
+        
+        //Saving operation
+        realm.beginWrite()
+        realm.add(newArticle)
+        do{
+            try realm.commitWrite()
+        }catch let error {
+            debugPrint(error)
+        }
+        
+    }
+    
     
 }
 
