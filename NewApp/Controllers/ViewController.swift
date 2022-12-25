@@ -129,6 +129,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let urlString = self.articlesData[indexPath.row].url
+        let url = URL(string: urlString)
+        
+        if let url = url {
+            let webViewVC = WebViewController(url: url)
+            self.navigationController?.pushViewController(webViewVC, animated: true)
+        }
+        
         //openFullDetailOfNews(articlesData[indexPath.row].url)
     }
     
