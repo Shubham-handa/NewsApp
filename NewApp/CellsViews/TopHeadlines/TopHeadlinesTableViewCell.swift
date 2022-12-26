@@ -13,7 +13,6 @@ protocol TopHeadlinesTVDelegate:AnyObject {
 }
 
 class TopHeadlinesTableViewCell: UITableViewCell {
-    
     weak var delegate: TopHeadlinesTVDelegate?
     var indexPath: IndexPath = []
     @IBOutlet weak var newsImageView: UIImageView!
@@ -22,7 +21,6 @@ class TopHeadlinesTableViewCell: UITableViewCell {
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var newsPublishedTime: UILabel!
     static let nibName = "TopHeadlinesTableViewCell"
-    
     
     static func getNib() -> UINib {
         return UINib(nibName: nibName, bundle: nil)
@@ -35,22 +33,16 @@ class TopHeadlinesTableViewCell: UITableViewCell {
         self.cardView.clipsToBounds = true
         newsImageView.clipsToBounds = true
         self.selectionStyle = .none
-        
-         
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     @IBAction func savedNewsButton(_ sender: UIButton) {
         self.delegate?.sendIndexPathOfTappedNews(indexPath.section, indexPath.row)
         debugPrint(indexPath)
     }
-    
     
     func setUpData(_ article: Article,_ indexPath: IndexPath) {
         //debugPrint(article)
@@ -60,15 +52,4 @@ class TopHeadlinesTableViewCell: UITableViewCell {
         newsTitleLabel.text = article.title
         newsImageView.sd_setImage(with: URL(string: article.urlToImage), placeholderImage: UIImage(systemName: "slowmo"), options: .continueInBackground, completed: nil)
     }
-    
-    
-    
 }
-
-//extension TopHeadlinesTableViewCell: TopHeadlinesTVDelegate {
-//    func sendIndexPathOfTappedNews(_ section: Int, _ row: Int) {
-//
-//    }
-//
-//
-//}

@@ -17,6 +17,8 @@
 		C449F5B12952CF49009DEB78 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C449F5B02952CF49009DEB78 /* CustomHeaderView.swift */; };
 		C449F5B32952CF59009DEB78 /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C449F5B22952CF59009DEB78 /* CustomHeaderView.xib */; };
 		C449F5B629537F71009DEB78 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C449F5B529537F71009DEB78 /* Utility.swift */; };
+		C4531A44295A1A610096FA5F /* ArticleDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4531A43295A1A610096FA5F /* ArticleDataRepository.swift */; };
+		C4531A46295A1A6E0096FA5F /* ArticleDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4531A45295A1A6E0096FA5F /* ArticleDataManager.swift */; };
 		C46C57A3295190A60048978F /* CategoryWiseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C57A1295190A60048978F /* CategoryWiseTableViewCell.swift */; };
 		C46C57A4295190A60048978F /* CategoryWiseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C46C57A2295190A60048978F /* CategoryWiseTableViewCell.xib */; };
 		C46C57A92951954A0048978F /* GenericCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C57A72951954A0048978F /* GenericCollectionViewCell.swift */; };
@@ -66,6 +68,8 @@
 		C449F5B02952CF49009DEB78 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		C449F5B22952CF59009DEB78 /* CustomHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomHeaderView.xib; sourceTree = "<group>"; };
 		C449F5B529537F71009DEB78 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		C4531A43295A1A610096FA5F /* ArticleDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataRepository.swift; sourceTree = "<group>"; };
+		C4531A45295A1A6E0096FA5F /* ArticleDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataManager.swift; sourceTree = "<group>"; };
 		C46C57A1295190A60048978F /* CategoryWiseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWiseTableViewCell.swift; sourceTree = "<group>"; };
 		C46C57A2295190A60048978F /* CategoryWiseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryWiseTableViewCell.xib; sourceTree = "<group>"; };
 		C46C57A72951954A0048978F /* GenericCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -168,6 +172,15 @@
 			path = utility;
 			sourceTree = "<group>";
 		};
+		C4531A42295A18400096FA5F /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				C4531A43295A1A610096FA5F /* ArticleDataRepository.swift */,
+				C4531A45295A1A6E0096FA5F /* ArticleDataManager.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		C46C57A02951907E0048978F /* CategoryNews */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +266,7 @@
 		C4A4C6B3294CA9590081EBAA /* NewApp */ = {
 			isa = PBXGroup;
 			children = (
+				C4531A42295A18400096FA5F /* Repository */,
 				C449F5B429537F5E009DEB78 /* utility */,
 				C46C57AB2952263F0048978F /* Views */,
 				C49CFF31294DC24400A77E58 /* Models */,
@@ -497,11 +511,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4531A46295A1A6E0096FA5F /* ArticleDataManager.swift in Sources */,
 				C40D8FB12950B8FA00552B3A /* BookMarkedNewsViewController.swift in Sources */,
 				C46C57A3295190A60048978F /* CategoryWiseTableViewCell.swift in Sources */,
 				C40D8FB32950B90E00552B3A /* SearchNewsViewController.swift in Sources */,
 				C4A4C6EB294CF83D0081EBAA /* Fetcher.swift in Sources */,
 				C438B73929542F86009EDD7A /* ArticleDBModel.swift in Sources */,
+				C4531A44295A1A610096FA5F /* ArticleDataRepository.swift in Sources */,
 				C449F5B12952CF49009DEB78 /* CustomHeaderView.swift in Sources */,
 				C46C57A92951954A0048978F /* GenericCollectionViewCell.swift in Sources */,
 				C4A4C6B9294CA9590081EBAA /* ViewController.swift in Sources */,

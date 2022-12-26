@@ -37,14 +37,10 @@ class WebViewController: UIViewController {
         DispatchQueue.main.async {
             self.webView.load(URLRequest(url: self.url))
         }
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         webView.frame = view.bounds
     }
-    
-
 }
