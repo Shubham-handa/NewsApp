@@ -13,6 +13,8 @@ class CategoryWiseTableViewCell: UITableViewCell {
     
     static let nibName = "CategoryWiseTableViewCell"
     
+    var article = [Article]()
+    
     @IBOutlet weak var cardView: UIView!
     static func getNib() -> UINib {
         return UINib(nibName: nibName, bundle: nil)
@@ -39,12 +41,17 @@ class CategoryWiseTableViewCell: UITableViewCell {
 
     }
     
+    func setUpData(article: [Article]) {
+        self.article = article
+        self.cwNewsCollectionView.reloadData()
+    }
+    
 }
 
 extension CategoryWiseTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return self.article.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -52,7 +59,7 @@ extension CategoryWiseTableViewCell: UICollectionViewDelegate, UICollectionViewD
         guard let cell = cwNewsCollectionView.dequeueReusableCell(withReuseIdentifier: GenericCollectionViewCell.nibName, for: indexPath) as? GenericCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
+        cell.setUpData(article[indexPath.row])
         return cell
     }
     

@@ -11,31 +11,37 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GenericCollectionViewCell" id="gTV-IL-0wX" customClass="GenericCollectionViewCell" customModule="NewApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+            <rect key="frame" x="0.0" y="0.0" width="347" height="300"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                <rect key="frame" x="0.0" y="0.0" width="347" height="300"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EwE-nR-vcH">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="347" height="300"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitcoin" translatesAutoresizingMaskIntoConstraints="NO" id="0eh-1y-3gH">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
+                                <rect key="frame" x="0.0" y="0.0" width="347" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="Z81-5I-fHW"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Bitcoin Price Slides to Two-Year Low as Fears Persist Over FTX Contagion" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceW-s0-NYh">
-                                <rect key="frame" x="20" y="160" width="260" height="89"/>
+                                <rect key="frame" x="20" y="160" width="307" height="89"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paul R. La Monica" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QpO-aW-hkI">
-                                <rect key="frame" x="20" y="259" width="260" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Paul R. La Monica" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QpO-aW-hkI">
+                                <rect key="frame" x="20.000000000000014" y="259" width="236.33333333333337" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" systemColor="tintColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12D Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUm-m9-jTN">
+                                <rect key="frame" x="266.33333333333331" y="260" width="60.666666666666686" height="19.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -46,9 +52,11 @@
                             <constraint firstItem="QpO-aW-hkI" firstAttribute="leading" secondItem="EwE-nR-vcH" secondAttribute="leading" constant="20" id="6AL-je-M7w"/>
                             <constraint firstAttribute="trailing" secondItem="ceW-s0-NYh" secondAttribute="trailing" constant="20" id="Bhk-vg-8o5"/>
                             <constraint firstItem="ceW-s0-NYh" firstAttribute="top" secondItem="0eh-1y-3gH" secondAttribute="bottom" constant="10" id="FID-dQ-yo2"/>
+                            <constraint firstAttribute="trailing" secondItem="VUm-m9-jTN" secondAttribute="trailing" constant="20" id="GWB-Ln-X9p"/>
                             <constraint firstItem="0eh-1y-3gH" firstAttribute="leading" secondItem="EwE-nR-vcH" secondAttribute="leading" id="Ibz-Fb-xNX"/>
-                            <constraint firstAttribute="trailing" secondItem="QpO-aW-hkI" secondAttribute="trailing" constant="20" id="Xbp-x7-eeM"/>
+                            <constraint firstItem="VUm-m9-jTN" firstAttribute="leading" secondItem="QpO-aW-hkI" secondAttribute="trailing" constant="10" id="LBL-gx-2BE"/>
                             <constraint firstItem="0eh-1y-3gH" firstAttribute="top" secondItem="EwE-nR-vcH" secondAttribute="top" id="m9S-28-rHs"/>
+                            <constraint firstItem="VUm-m9-jTN" firstAttribute="centerY" secondItem="QpO-aW-hkI" secondAttribute="centerY" id="v8m-Yw-nPM"/>
                             <constraint firstAttribute="trailing" secondItem="0eh-1y-3gH" secondAttribute="trailing" id="xR3-xN-hyS"/>
                             <constraint firstAttribute="bottom" secondItem="QpO-aW-hkI" secondAttribute="bottom" constant="20" id="zhW-Uq-UAo"/>
                         </constraints>
@@ -62,14 +70,15 @@
                 <constraint firstItem="EwE-nR-vcH" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="JTy-pv-w88"/>
                 <constraint firstItem="EwE-nR-vcH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Yso-25-yGc"/>
             </constraints>
-            <size key="customSize" width="319" height="267"/>
+            <size key="customSize" width="366" height="267"/>
             <connections>
                 <outlet property="cardView" destination="EwE-nR-vcH" id="gdh-RK-Hhw"/>
                 <outlet property="newsAuthorLabel" destination="QpO-aW-hkI" id="7Mi-5J-zbY"/>
                 <outlet property="newsImageView" destination="0eh-1y-3gH" id="hS1-dq-SSB"/>
+                <outlet property="newsPublishedAt" destination="VUm-m9-jTN" id="AKW-hI-sYQ"/>
                 <outlet property="newsTitleLabel" destination="ceW-s0-NYh" id="d2A-XL-XhJ"/>
             </connections>
-            <point key="canvasLocation" x="-158.01526717557252" y="96.126760563380287"/>
+            <point key="canvasLocation" x="-122.90076335877862" y="95.774647887323951"/>
         </collectionViewCell>
     </objects>
     <resources>

@@ -16,6 +16,7 @@ class BookMarkedNewsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        render()
         registerCells()
         // Do any additional setup after loading the view.
     }
@@ -89,6 +90,7 @@ extension BookMarkedNewsViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = bookMarkedNewsTV.dequeueReusableCell(withIdentifier: SavedNewsTableViewCell.nibName, for: indexPath) as? SavedNewsTableViewCell else {return UITableViewCell()}
+        cell.setUpData(articles[indexPath.row])
         return cell
     }
     

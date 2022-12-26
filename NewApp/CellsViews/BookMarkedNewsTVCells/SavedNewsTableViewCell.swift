@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SavedNewsTableViewCell: UITableViewCell {
 
@@ -32,6 +33,12 @@ class SavedNewsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setUpData(_ article: ArticleDBModel){
+        newsPublishedAtLV.text = findTime(article.publishedAt)
+        newsTitleLV.text = article.title
+        newsIV.sd_setImage(with: URL(string: article.urlToImage), placeholderImage: UIImage(systemName: "slowmo"), options: .continueInBackground, completed: nil)
     }
     
     @IBAction func moreButton(_ sender: UIButton) {

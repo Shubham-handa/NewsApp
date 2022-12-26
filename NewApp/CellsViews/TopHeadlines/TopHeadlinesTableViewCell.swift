@@ -8,14 +8,21 @@
 import UIKit
 import SDWebImage
 
+protocol TopHeadlinesTVDelegate:AnyObject {
+    func sendIndexPathOfTappedNews(_ section: Int,_ row: Int)
+}
+
 class TopHeadlinesTableViewCell: UITableViewCell {
     
+    weak var delegate: TopHeadlinesTVDelegate?
+    var indexPath: IndexPath = []
     @IBOutlet weak var newsImageView: UIImageView!
     @IBOutlet weak var sourceLabel: UILabel!
     @IBOutlet weak var newsTitleLabel: UILabel!
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var newsPublishedTime: UILabel!
     static let nibName = "TopHeadlinesTableViewCell"
+    
     
     static func getNib() -> UINib {
         return UINib(nibName: nibName, bundle: nil)
@@ -39,12 +46,29 @@ class TopHeadlinesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setUpData(_ article: Article) {
+    @IBAction func savedNewsButton(_ sender: UIButton) {
+        self.delegate?.sendIndexPathOfTappedNews(indexPath.section, indexPath.row)
+        debugPrint(indexPath)
+    }
+    
+    
+    func setUpData(_ article: Article,_ indexPath: IndexPath) {
         //debugPrint(article)
+        self.indexPath = indexPath
         newsPublishedTime.text = findTime(article.publishedAt)
         sourceLabel.text = article.source?.name
         newsTitleLabel.text = article.title
         newsImageView.sd_setImage(with: URL(string: article.urlToImage), placeholderImage: UIImage(systemName: "slowmo"), options: .continueInBackground, completed: nil)
     }
     
+    
+    
 }
+
+//extension TopHeadlinesTableViewCell: TopHeadlinesTVDelegate {
+//    func sendIndexPathOfTappedNews(_ section: Int, _ row: Int) {
+//
+//    }
+//
+//
+//}

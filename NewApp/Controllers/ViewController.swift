@@ -9,21 +9,21 @@ import UIKit
 import WebKit
 import RealmSwift
 
-class ViewController: UIViewController {
+class ViewController: UIViewController{
+    
+    
     
     @IBOutlet weak var newsDisplayTableView: UITableView!
     let realm = try! Realm()
-    let webView = WKWebView()
+//    let webView = WKWebView()
     var articlesData: [Article] = []
+    var articles = [[Article]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
         registerCells()
         //
-        registerWebViewDelegate()
-        
-        
         self.navigationItem.titleView = imageViewTitle()
     }
     
@@ -48,12 +48,23 @@ class ViewController: UIViewController {
     }
     
     func setUp(){
+        fetchBySpecific("bitcoin")
         fetch()
+    }
+    
+    func fetchBySpecific(_ nameOfThing: String) {
+        Fetcher.shared.fetchBySpecificThing(nameOfThing){ articlesData in
+            self.articles.append(articlesData)
+            debugPrint(self.articles[0].count)
+            //debugPrint(self.articles[0][0].title)
+            self.reloadTableViewData()
+        }
     }
     
     func fetch(){
         Fetcher.shared.fetchTopHeadlinesParticularCountry { articlesData in
             self.articlesData = articlesData
+            self.articles.append(self.articlesData)
             self.reloadTableViewData()
         }
     }
@@ -64,25 +75,19 @@ class ViewController: UIViewController {
         }
         
     }
-
-//    @IBAction func goToSomeOtherView(_ sender: UIButton) {
-//
-//        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: ViewController.randomViewControllerStoryBoardId ) as? RandomViewController else { return }
-//
-//        self.navigationController?.pushViewController(vc, animated: true)
-//    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
         switch section {
         case 0: count = 1
-        case 1: count = self.articlesData.count
+        case 1: count = self.articles[section].count
         default:
             count = 0
         }
-       return count
+        return count
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -97,10 +102,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             guard let bitcoinCell = newsDisplayTableView.dequeueReusableCell(withIdentifier: CategoryWiseTableViewCell.nibName, for: indexPath) as? CategoryWiseTableViewCell else {return UITableViewCell()}
+            bitcoinCell.setUpData(article: articles[indexPath.section])
             return bitcoinCell
         case 1:
             guard let topHeadlineCell = newsDisplayTableView.dequeueReusableCell(withIdentifier: TopHeadlinesTableViewCell.nibName, for: indexPath) as? TopHeadlinesTableViewCell else {return UITableViewCell()}
-            topHeadlineCell.setUpData(articlesData[indexPath.row])
+            topHeadlineCell.delegate = self
+            topHeadlineCell.setUpData(articles[indexPath.section][indexPath.row], indexPath)
             return topHeadlineCell
         default:
             return UITableViewCell()
@@ -123,7 +130,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return articles.count
     }
     
     
@@ -177,28 +184,12 @@ extension ViewController {
     
 }
 
-// MARK: WebView
+// MARK: Delegate Protocol
 
-extension ViewController: WKNavigationDelegate {
-    
-    func registerWebViewDelegate() {
-        webView.allowsBackForwardNavigationGestures = true
-        webView.navigationDelegate = self
-    }
-    
-    func openFullDetailOfNews(_ url: String) {
-        guard let url = URL(string: url) else {return}
-        webView.load(URLRequest(url: url))
-//        DispatchQueue.main.sync {
-//            self.webView.load(URLRequest(url: url))
-//        }
-        
-    }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        webView.frame = view.bounds
+extension ViewController: TopHeadlinesTVDelegate {
+    func sendIndexPathOfTappedNews(_ section: Int, _ row: Int) {
+        debugPrint("Section \(section) row \(row)")
     }
-    
 }
 

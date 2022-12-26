@@ -43,9 +43,9 @@ func findTime(_ publishedAt: String) -> String {
     debugPrint("Final \(final)")
     
     if final > 23 {
-        resultedTime = "1Day"
+        resultedTime = "1D ago"
     }else {
-        resultedTime = "\(final)h"
+        resultedTime = "\(final)h ago"
     }
     
     return resultedTime
