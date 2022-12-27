@@ -9,13 +9,9 @@ import UIKit
 import WebKit
 import RealmSwift
 
-protocol ViewControllerDelegate: AnyObject {
-    func didTapOnSaveButton(_ status: String)
-}
-
 class ViewController: UIViewController{
     @IBOutlet weak var newsDisplayTableView: UITableView!
-    weak var viewControllerDelegate: ViewControllerDelegate?
+
     private let articleDataManager: ArticleDataManager = ArticleDataManager()
     var articlesData: [Article] = []
     var articles = [[Article]]()
@@ -159,7 +155,7 @@ extension ViewController: TopHeadlinesTVDelegate {
         debugPrint("Section \(section) row \(row)")
         let article = self.articles[section][row]
         articleDataManager.saveNewsArticle(article)
-        self.viewControllerDelegate?.didTapOnSaveButton("saved")
+        NotificationCenter.default.post(name: Notification.Name("dataAdd"), object: nil)
     }
 }
 
