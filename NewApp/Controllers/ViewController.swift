@@ -9,11 +9,17 @@ import UIKit
 import WebKit
 import RealmSwift
 
+protocol ViewControllerDelegate: AnyObject {
+    func didTapOnSaveButton(_ status: String)
+}
+
 class ViewController: UIViewController{
     @IBOutlet weak var newsDisplayTableView: UITableView!
+    weak var viewControllerDelegate: ViewControllerDelegate?
     private let articleDataManager: ArticleDataManager = ArticleDataManager()
     var articlesData: [Article] = []
     var articles = [[Article]]()
+    var addBitcoinData = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +27,7 @@ class ViewController: UIViewController{
         registerCells()
         //
         self.navigationItem.titleView = imageViewTitle()
+        
     }
     
     func imageViewTitle() -> UIImageView {
@@ -42,24 +49,33 @@ class ViewController: UIViewController{
     }
     
     func setUp(){
-        fetchBySpecific("bitcoin")
-        fetch()
-    }
-    
-    func fetchBySpecific(_ nameOfThing: String) {
-        Fetcher.shared.fetchBySpecificThing(nameOfThing){ articlesData in
-            self.articles.append(articlesData)
-            debugPrint(self.articles[0].count)
-            self.reloadTableViewData()
+        
+        let dispatchGroup = DispatchGroup()
+        
+        let fetchNewsBySpecificThingBO = BlockOperation()
+        fetchNewsBySpecificThingBO.addExecutionBlock {
+            dispatchGroup.enter()
+            Fetcher.shared.fetchBySpecificThing("bitcoin"){ articlesData in
+                self.articles.append(articlesData)
+                dispatchGroup.leave()
+            }
+            dispatchGroup.wait()
         }
-    }
-    
-    func fetch(){
-        Fetcher.shared.fetchTopHeadlinesParticularCountry { articlesData in
-            self.articlesData = articlesData
-            self.articles.append(self.articlesData)
-            self.reloadTableViewData()
+        
+        let fetchTopHeadlinesBO = BlockOperation()
+        fetchTopHeadlinesBO.addExecutionBlock {
+            Fetcher.shared.fetchTopHeadlinesParticularCountry { articlesData in
+                        self.articles.append(articlesData)
+                self.reloadTableViewData()
+            }
         }
+        
+        fetchTopHeadlinesBO.addDependency(fetchNewsBySpecificThingBO)
+        
+        let operationQueue = OperationQueue()
+        operationQueue.addOperation(fetchTopHeadlinesBO)
+        operationQueue.addOperation(fetchNewsBySpecificThingBO)
+        
     }
     
     func reloadTableViewData() {
@@ -143,6 +159,7 @@ extension ViewController: TopHeadlinesTVDelegate {
         debugPrint("Section \(section) row \(row)")
         let article = self.articles[section][row]
         articleDataManager.saveNewsArticle(article)
+        self.viewControllerDelegate?.didTapOnSaveButton("saved")
     }
 }
 

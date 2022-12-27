@@ -11,10 +11,13 @@ import RealmSwift
 class BookMarkedNewsViewController: UIViewController {
     var articles: [ArticleDBModel] = []
     @IBOutlet weak var bookMarkedNewsTV: UITableView!
+    var mainVC = ViewController()
     private let articleDataManager: ArticleDataManager = ArticleDataManager()
+    var didTapOnSave = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainVC.viewControllerDelegate = self
         getData()
         registerCells()
     }
@@ -46,5 +49,14 @@ extension BookMarkedNewsViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110
+    }
+}
+
+extension BookMarkedNewsViewController:ViewControllerDelegate {
+    func didTapOnSaveButton(_ status: String) {
+        debugPrint(status)
+        if status == "saved"{
+            getData()
+        }
     }
 }

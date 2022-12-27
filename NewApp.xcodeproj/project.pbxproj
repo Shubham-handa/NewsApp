@@ -193,18 +193,10 @@
 		C46C57A5295194630048978F /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				C46C57A62951952F0048978F /* New Group */,
 				C46C57A72951954A0048978F /* GenericCollectionViewCell.swift */,
 				C46C57A82951954A0048978F /* GenericCollectionViewCell.xib */,
 			);
 			path = CollectionViewCells;
-			sourceTree = "<group>";
-		};
-		C46C57A62951952F0048978F /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		C46C57AB2952263F0048978F /* Views */ = {
