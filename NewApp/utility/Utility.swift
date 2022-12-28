@@ -10,7 +10,7 @@ import Foundation
 func findTime(_ publishedAt: String) -> String {
     var resultedTime = ""
     
-    debugPrint("Date new publishedAt \(publishedAt)")
+    //debugPrint("Date new publishedAt \(publishedAt)")
     //Date Foramting of publishedDate of News coming from api
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -25,10 +25,10 @@ func findTime(_ publishedAt: String) -> String {
     //Date Formating of current date
     let mytime = Date()
     let currentDateForMatter = DateFormatter()
-    print(mytime)
+    //print(mytime)
     dateFormatter.dateFormat = "HH"
     let currentResult = dateFormatter.string(from: mytime)
-    debugPrint("current Date \(currentResult)")
+    //debugPrint("current Date \(currentResult)")
     
     //Change to int
     var d1 = 0
@@ -40,11 +40,12 @@ func findTime(_ publishedAt: String) -> String {
         d2 = first
     }
     let final = abs(d1 - d2)
-    debugPrint("Final \(final)")
+    //debugPrint("Final \(final)")
     
     if final > 23 {
         resultedTime = "1D ago"
-    }else {
+    }
+    else {
         resultedTime = "\(final)h ago"
     }
     

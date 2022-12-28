@@ -13,13 +13,14 @@ protocol TopHeadlinesTVDelegate:AnyObject {
 }
 
 class TopHeadlinesTableViewCell: UITableViewCell {
-    weak var delegate: TopHeadlinesTVDelegate?
-    var indexPath: IndexPath = []
+    
     @IBOutlet weak var newsImageView: UIImageView!
     @IBOutlet weak var sourceLabel: UILabel!
     @IBOutlet weak var newsTitleLabel: UILabel!
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var newsPublishedTime: UILabel!
+    weak var delegate: TopHeadlinesTVDelegate?
+    var indexPath: IndexPath = []
     static let nibName = "TopHeadlinesTableViewCell"
     
     static func getNib() -> UINib {

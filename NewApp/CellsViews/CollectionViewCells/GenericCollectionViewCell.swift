@@ -22,9 +22,9 @@ class GenericCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.cardView.layer.cornerRadius = 50
-//        self.cardView.clipsToBounds = true
-//        newsImageView.clipsToBounds = true
+        self.cardView.layer.cornerRadius = 20
+        self.cardView.clipsToBounds = true
+        newsImageView.clipsToBounds = true
         // Initialization code
     }
     
@@ -32,6 +32,9 @@ class GenericCollectionViewCell: UICollectionViewCell {
     func setUpData(_ article: Article) {
         //debugPrint(article)
         newsPublishedAt.text = findTime(article.publishedAt)
+        if article.author.isEmpty {
+            article.author = "Random"
+        }
         newsAuthorLabel.text = article.author
         newsTitleLabel.text = article.title
         newsImageView.sd_setImage(with: URL(string: article.urlToImage), placeholderImage: UIImage(systemName: "slowmo"), options: .continueInBackground, completed: nil)

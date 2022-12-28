@@ -27,7 +27,7 @@ class CategoryWiseTableViewCell: UITableViewCell {
         cwNewsCollectionView.delegate = self
         cwNewsCollectionView.dataSource = self
         //self.cardView.layer.cornerRadius = 30
-       // self.cwNewsCollectionView.layer.cornerRadius = 30
+        //self.cwNewsCollectionView.layer.cornerRadius = 20
 
     }
     
@@ -68,7 +68,7 @@ extension CategoryWiseTableViewCell: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
                         UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return CGSize(width: 300, height: 400) // Collection View size right?
+        return CGSize(width: 300, height: 350) // Collection View size right?
 
     }
     

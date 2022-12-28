@@ -102,6 +102,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             guard let bitcoinCell = newsDisplayTableView.dequeueReusableCell(withIdentifier: CategoryWiseTableViewCell.nibName, for: indexPath) as? CategoryWiseTableViewCell else {return UITableViewCell()}
+            
             bitcoinCell.setUpData(article: articles[indexPath.section])
             return bitcoinCell
         case 1:
@@ -143,7 +144,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height: CGFloat = 370
         if indexPath.section == 0{
-            height = 400
+            height = 350
         }
         return height
     }
