@@ -27,9 +27,9 @@ class ViewController: UIViewController{
     }
     
     func imageViewTitle() -> UIImageView {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
-        imageView.contentMode = .scaleAspectFill
-        let image = UIImage(named: "bbcNewsIcon1")
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 40))
+        imageView.contentMode = .scaleAspectFit
+        let image = UIImage(named: "newsIcon2")
         imageView.image = image
         navigationItem.titleView = imageView
         return imageView

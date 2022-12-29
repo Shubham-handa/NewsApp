@@ -57,7 +57,9 @@
                                     <constraint firstAttribute="width" constant="25" id="MsE-vo-2zO"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <buttonConfiguration key="configuration" style="plain" image="bookmark" catalog="system" title=""/>
+                                <buttonConfiguration key="configuration" style="plain" image="bookmark" catalog="system" title="">
+                                    <color key="baseForegroundColor" systemColor="tintColor"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="savedNewsButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="NkF-qU-uAe"/>
                                 </connections>
@@ -107,6 +109,9 @@
         <image name="pic" width="1200" height="667"/>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
