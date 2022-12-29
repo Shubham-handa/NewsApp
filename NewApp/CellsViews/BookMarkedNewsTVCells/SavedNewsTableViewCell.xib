@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -42,14 +41,13 @@
                                 <rect key="frame" x="330.33333333333331" y="52.666666666666657" width="47.666666666666686" height="34.333333333333343"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="ellipsis" catalog="system" title="">
-                                    <color key="baseForegroundColor" red="1" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="baseForegroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="moreButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fKm-r2-zch"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="e4z-yr-Vcm" firstAttribute="top" secondItem="LLF-Gu-DFQ" secondAttribute="top" id="Arf-O9-nCi"/>
                             <constraint firstItem="eX9-l8-o68" firstAttribute="top" secondItem="iCg-MS-wgC" secondAttribute="bottom" constant="8" id="Bu6-ff-lbA"/>
@@ -87,8 +85,5 @@
     <resources>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="pic" width="1200" height="667"/>
-        <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>

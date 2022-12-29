@@ -52,6 +52,13 @@ class SearchNewsViewController: UIViewController {
         }
         
     }
+    
+    func showWarningRelatedToNoData() {
+        DispatchQueue.main.async {
+            self.dataNotGetMessageLabel.isHidden = false
+        }
+        
+    }
 }
 
 extension SearchNewsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -101,6 +108,11 @@ extension SearchNewsViewController: UISearchBarDelegate {
                 self.showTableView()
                 self.reloadTableViewData()
             }
+//            }else {
+//                debugPrint(articlesData)
+//                self.hideTableView()
+//                self.showWarningRelatedToNoData()
+//            }
         }
     }
 }

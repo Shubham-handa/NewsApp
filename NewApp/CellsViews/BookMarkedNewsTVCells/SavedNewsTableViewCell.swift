@@ -31,7 +31,7 @@ class SavedNewsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.cardView.layer.cornerRadius = 30
+        self.cardView.layer.cornerRadius = 24
         self.cardView.clipsToBounds = true
         newsIV.clipsToBounds = true
         

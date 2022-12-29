@@ -65,7 +65,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="EFW-H5-h24" firstAttribute="top" secondItem="Wup-Qn-yvq" secondAttribute="bottom" constant="10" id="31F-YX-g6f"/>
                             <constraint firstItem="0Tu-ay-U2b" firstAttribute="centerY" secondItem="EFW-H5-h24" secondAttribute="centerY" id="39U-Lq-HTT"/>
@@ -107,9 +106,6 @@
     <resources>
         <image name="bookmark" catalog="system" width="110" height="128"/>
         <image name="pic" width="1200" height="667"/>
-        <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
