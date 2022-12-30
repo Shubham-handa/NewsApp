@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import WebKit
 import RealmSwift
 
 class ViewController: UIViewController{
@@ -116,14 +115,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let urlString = self.articlesData[indexPath.row].url
-        let url = URL(string: urlString)
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        let urlString = self.articlesData[indexPath.row].url
+//        let url = URL(string: urlString)
         
-        if let url = url {
-            let webViewVC = WebViewController(url: url)
-            self.navigationController?.pushViewController(webViewVC, animated: true)
-        }
+        //guard let randomVC = RandomViewController els
+        self.navigationController?.pushViewController(WKWebViewController(), animated: true)
+//        if let url = url {
+//            //let webViewVC = WebViewController(url: url)
+//            guard let Ran
+//            self.navigationController?.pushViewController(webViewVC, animated: true)
+//        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

@@ -37,7 +37,7 @@
 		C4A4C6CC294CA95A0081EBAA /* NewAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A4C6CB294CA95A0081EBAA /* NewAppTests.swift */; };
 		C4A4C6D6294CA95A0081EBAA /* NewAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A4C6D5294CA95A0081EBAA /* NewAppUITests.swift */; };
 		C4A4C6D8294CA95A0081EBAA /* NewAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A4C6D7294CA95A0081EBAA /* NewAppUITestsLaunchTests.swift */; };
-		C4A4C6E5294CEDA10081EBAA /* RandomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A4C6E4294CEDA10081EBAA /* RandomViewController.swift */; };
+		C4A4C6E5294CEDA10081EBAA /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A4C6E4294CEDA10081EBAA /* WKWebViewController.swift */; };
 		C4A4C6EB294CF83D0081EBAA /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A4C6EA294CF83D0081EBAA /* Fetcher.swift */; };
 /* End PBXBuildFile section */
 
@@ -94,7 +94,7 @@
 		C4A4C6D1294CA95A0081EBAA /* NewAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4A4C6D5294CA95A0081EBAA /* NewAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAppUITests.swift; sourceTree = "<group>"; };
 		C4A4C6D7294CA95A0081EBAA /* NewAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C4A4C6E4294CEDA10081EBAA /* RandomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomViewController.swift; sourceTree = "<group>"; };
+		C4A4C6E4294CEDA10081EBAA /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		C4A4C6EA294CF83D0081EBAA /* Fetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
 		DCBEB88EE5E739A8329FB3D6 /* Pods-NewApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewApp.debug.xcconfig"; path = "Target Support Files/Pods-NewApp/Pods-NewApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -292,7 +292,6 @@
 				C4A4C6BD294CA95A0081EBAA /* Assets.xcassets */,
 				C4A4C6BF294CA95A0081EBAA /* LaunchScreen.storyboard */,
 				C4A4C6C2294CA95A0081EBAA /* Info.plist */,
-				C4A4C6E4294CEDA10081EBAA /* RandomViewController.swift */,
 			);
 			path = NewApp;
 			sourceTree = "<group>";
@@ -325,6 +324,7 @@
 		C4A4C6E8294CF8020081EBAA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C4A4C6E4294CEDA10081EBAA /* WKWebViewController.swift */,
 				C4A4C6B8294CA9590081EBAA /* ViewController.swift */,
 				C40D8FB02950B8FA00552B3A /* BookMarkedNewsViewController.swift */,
 				C40D8FB22950B90E00552B3A /* SearchNewsViewController.swift */,
@@ -539,7 +539,7 @@
 				C4A4C6B9294CA9590081EBAA /* ViewController.swift in Sources */,
 				C438B73D2954C029009EDD7A /* SavedNewsTableViewCell.swift in Sources */,
 				C449F5B629537F71009DEB78 /* Utility.swift in Sources */,
-				C4A4C6E5294CEDA10081EBAA /* RandomViewController.swift in Sources */,
+				C4A4C6E5294CEDA10081EBAA /* WKWebViewController.swift in Sources */,
 				C4A4C6B5294CA9590081EBAA /* AppDelegate.swift in Sources */,
 				C4A4C6B7294CA9590081EBAA /* SceneDelegate.swift in Sources */,
 				C49CFF3A294DE56700A77E58 /* TopHeadlinesTableViewCell.swift in Sources */,
