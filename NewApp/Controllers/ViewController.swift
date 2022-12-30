@@ -120,7 +120,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 //        let url = URL(string: urlString)
         
         //guard let randomVC = RandomViewController els
-        self.navigationController?.pushViewController(WKWebViewController(), animated: true)
+        guard let webViewController = storyboard?.instantiateViewController(withIdentifier: "WKWebViewController") as? WKWebViewController else {return}
+        self.navigationController?.pushViewController(webViewController, animated: true)
 //        if let url = url {
 //            //let webViewVC = WebViewController(url: url)
 //            guard let Ran

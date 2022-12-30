@@ -19,6 +19,7 @@
 		C449F5B629537F71009DEB78 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C449F5B529537F71009DEB78 /* Utility.swift */; };
 		C4531A44295A1A610096FA5F /* ArticleDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4531A43295A1A610096FA5F /* ArticleDataRepository.swift */; };
 		C4531A46295A1A6E0096FA5F /* ArticleDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4531A45295A1A6E0096FA5F /* ArticleDataManager.swift */; };
+		C4603DD6295F4D860026E759 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4603DD5295F4D860026E759 /* WKWebViewController.swift */; };
 		C46C57A3295190A60048978F /* CategoryWiseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C57A1295190A60048978F /* CategoryWiseTableViewCell.swift */; };
 		C46C57A4295190A60048978F /* CategoryWiseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C46C57A2295190A60048978F /* CategoryWiseTableViewCell.xib */; };
 		C46C57A92951954A0048978F /* GenericCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C57A72951954A0048978F /* GenericCollectionViewCell.swift */; };
@@ -37,7 +38,6 @@
 		C4A4C6CC294CA95A0081EBAA /* NewAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A4C6CB294CA95A0081EBAA /* NewAppTests.swift */; };
 		C4A4C6D6294CA95A0081EBAA /* NewAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A4C6D5294CA95A0081EBAA /* NewAppUITests.swift */; };
 		C4A4C6D8294CA95A0081EBAA /* NewAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A4C6D7294CA95A0081EBAA /* NewAppUITestsLaunchTests.swift */; };
-		C4A4C6E5294CEDA10081EBAA /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A4C6E4294CEDA10081EBAA /* WKWebViewController.swift */; };
 		C4A4C6EB294CF83D0081EBAA /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A4C6EA294CF83D0081EBAA /* Fetcher.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +72,7 @@
 		C449F5B529537F71009DEB78 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		C4531A43295A1A610096FA5F /* ArticleDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataRepository.swift; sourceTree = "<group>"; };
 		C4531A45295A1A6E0096FA5F /* ArticleDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataManager.swift; sourceTree = "<group>"; };
+		C4603DD5295F4D860026E759 /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		C46C57A1295190A60048978F /* CategoryWiseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWiseTableViewCell.swift; sourceTree = "<group>"; };
 		C46C57A2295190A60048978F /* CategoryWiseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryWiseTableViewCell.xib; sourceTree = "<group>"; };
 		C46C57A72951954A0048978F /* GenericCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -94,7 +95,6 @@
 		C4A4C6D1294CA95A0081EBAA /* NewAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4A4C6D5294CA95A0081EBAA /* NewAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAppUITests.swift; sourceTree = "<group>"; };
 		C4A4C6D7294CA95A0081EBAA /* NewAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C4A4C6E4294CEDA10081EBAA /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		C4A4C6EA294CF83D0081EBAA /* Fetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
 		DCBEB88EE5E739A8329FB3D6 /* Pods-NewApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewApp.debug.xcconfig"; path = "Target Support Files/Pods-NewApp/Pods-NewApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -324,11 +324,11 @@
 		C4A4C6E8294CF8020081EBAA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C4A4C6E4294CEDA10081EBAA /* WKWebViewController.swift */,
 				C4A4C6B8294CA9590081EBAA /* ViewController.swift */,
 				C40D8FB02950B8FA00552B3A /* BookMarkedNewsViewController.swift */,
 				C40D8FB22950B90E00552B3A /* SearchNewsViewController.swift */,
 				C424204229589A3E002FB70F /* WebViewController.swift */,
+				C4603DD5295F4D860026E759 /* WKWebViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -534,12 +534,12 @@
 				C438B73929542F86009EDD7A /* ArticleDBModel.swift in Sources */,
 				C4531A44295A1A610096FA5F /* ArticleDataRepository.swift in Sources */,
 				C449F5B12952CF49009DEB78 /* CustomHeaderView.swift in Sources */,
+				C4603DD6295F4D860026E759 /* WKWebViewController.swift in Sources */,
 				C46F11BF295E153B00974806 /* SearchingNewsTableViewCell.swift in Sources */,
 				C46C57A92951954A0048978F /* GenericCollectionViewCell.swift in Sources */,
 				C4A4C6B9294CA9590081EBAA /* ViewController.swift in Sources */,
 				C438B73D2954C029009EDD7A /* SavedNewsTableViewCell.swift in Sources */,
 				C449F5B629537F71009DEB78 /* Utility.swift in Sources */,
-				C4A4C6E5294CEDA10081EBAA /* WKWebViewController.swift in Sources */,
 				C4A4C6B5294CA9590081EBAA /* AppDelegate.swift in Sources */,
 				C4A4C6B7294CA9590081EBAA /* SceneDelegate.swift in Sources */,
 				C49CFF3A294DE56700A77E58 /* TopHeadlinesTableViewCell.swift in Sources */,
