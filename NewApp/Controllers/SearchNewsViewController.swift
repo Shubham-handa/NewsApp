@@ -114,7 +114,6 @@ extension SearchNewsViewController: UISearchBarDelegate {
     }
     
     func saveNewsArticle(article: Article) {
-        //debugPrint(article.title)
         articleDataManager.saveNewsArticle(article)
         NotificationCenter.default.post(name: Notification.Name("dataAdd"), object: nil)
     }
