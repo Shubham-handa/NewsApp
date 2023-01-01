@@ -8,11 +8,16 @@
 import UIKit
 import SDWebImage
 
+//protocol SearchingNewTableViewDelegate: AnyObject {
+//    func didTapOnBookMarkedButton(_ index: Int)
+//}
+
 class SearchingNewsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var sourceViewLabel: UILabel!
     @IBOutlet weak var titleViewLabel: UILabel!
     @IBOutlet weak var searchedNewsImageView: UIImageView!
+   // weak var delegate: SearchingNewTableViewDelegate?
     var index: Int = 0
     
     static let nibName = "SearchingNewsTableViewCell"
@@ -43,5 +48,9 @@ class SearchingNewsTableViewCell: UITableViewCell {
         titleViewLabel.text = article.title
         searchedNewsImageView.sd_setImage(with: URL(string: article.urlToImage), placeholderImage: UIImage(systemName: "slowmo"), options: .continueInBackground, completed: nil)
     }
+    
+//    func checkValueIsNotNill(_ data: String) -> String {
+//        return data.count != 0 ? ""
+//    }
     
 }

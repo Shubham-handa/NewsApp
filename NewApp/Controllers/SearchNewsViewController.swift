@@ -12,8 +12,9 @@ class SearchNewsViewController: UIViewController {
     @IBOutlet weak var newsSearchBar: UISearchBar!
     @IBOutlet weak var searchingNewsTableView: UITableView!
     @IBOutlet weak var dataNotGetMessageLabel: UILabel!
-    var articles: [Article] = []
-    var searchValue = ""
+    private let articleDataManager: ArticleDataManager = ArticleDataManager()
+    private var articles: [Article] = []
+    private var searchValue = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,10 +73,25 @@ extension SearchNewsViewController: UITableViewDelegate, UITableViewDataSource {
         guard let searchedNewsCell = searchingNewsTableView.dequeueReusableCell(withIdentifier: SearchingNewsTableViewCell.nibName, for: indexPath) as? SearchingNewsTableViewCell else {return UITableViewCell()}
         
         if !articles.isEmpty {
-            searchedNewsCell.setUpData(articles[indexPath.row], indexPath.row)
+            if articles[indexPath.row].title.count != 0{
+                searchedNewsCell.setUpData(articles[indexPath.row], indexPath.row)
+            }
         }
         
         return searchedNewsCell
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let newsArticle = articles[indexPath.row]
+        let saveArticleAction = UIContextualAction(style: .destructive, title: "Save", handler: {
+            (action, sourceView, completionHandler) in
+            self.saveNewsArticle(article: newsArticle)
+            completionHandler(true)
+        })
+        
+        saveArticleAction.backgroundColor = .green
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [saveArticleAction])
+        return swipeConfiguration
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -93,16 +109,22 @@ extension SearchNewsViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let value = searchBar.text {
             fetchNewsForSpecific(value)
+            
         }
     }
     
+    func saveNewsArticle(article: Article) {
+        //debugPrint(article.title)
+        articleDataManager.saveNewsArticle(article)
+        NotificationCenter.default.post(name: Notification.Name("dataAdd"), object: nil)
+    }
     
     func fetchNewsForSpecific(_ nameOfTheTopic: String) {
         searchValue = "News Regarding \(nameOfTheTopic)"
         Fetcher.shared.fetchBySpecificThing(nameOfTheTopic){ articlesData in
             
             if !articlesData.isEmpty {
-                debugPrint(articlesData)
+                //debugPrint(articlesData)
                 self.hideWarningRelatedToNoData()
                 self.articles = articlesData
                 self.showTableView()
