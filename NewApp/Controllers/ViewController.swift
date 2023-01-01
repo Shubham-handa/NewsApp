@@ -120,8 +120,18 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 //        let url = URL(string: urlString)
         
         //guard let randomVC = RandomViewController els
-        guard let webViewController = storyboard?.instantiateViewController(withIdentifier: "WKWebViewController") as? WKWebViewController else {return}
-        self.navigationController?.pushViewController(webViewController, animated: true)
+        let urlToLoadInWebView = articles[indexPath.section][indexPath.row].url
+        
+        if !urlToLoadInWebView.isEmpty {
+            guard let webViewController = storyboard?.instantiateViewController(withIdentifier: "WKWebViewController") as? WKWebViewController else {return}
+            webViewController.url = urlToLoadInWebView
+            self.navigationController?.pushViewController(webViewController, animated: true)
+        }
+       
+        
+        
+        
+        
 //        if let url = url {
 //            //let webViewVC = WebViewController(url: url)
 //            guard let Ran
@@ -155,7 +165,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: Delegate Protocol
 extension ViewController: TopHeadlinesTVDelegate {
-    func sendIndexPathOfTappedNews(_ section: Int, _ row: Int) {
+    
+    func sendIndexPathOfTappedNewsForSave(_ section: Int, _ row: Int) {
         debugPrint("Section \(section) row \(row)")
         let article = self.articles[section][row]
         articleDataManager.saveNewsArticle(article)

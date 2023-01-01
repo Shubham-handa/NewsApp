@@ -9,7 +9,8 @@ import UIKit
 import SDWebImage
 
 protocol TopHeadlinesTVDelegate:AnyObject {
-    func sendIndexPathOfTappedNews(_ section: Int,_ row: Int)
+    func sendIndexPathOfTappedNewsForSave(_ section: Int,_ row: Int)
+    
 }
 
 class TopHeadlinesTableViewCell: UITableViewCell {
@@ -41,7 +42,7 @@ class TopHeadlinesTableViewCell: UITableViewCell {
     }
     
     @IBAction func savedNewsButton(_ sender: UIButton) {
-        self.delegate?.sendIndexPathOfTappedNews(indexPath.section, indexPath.row)
+        self.delegate?.sendIndexPathOfTappedNewsForSave(indexPath.section, indexPath.row)
         debugPrint(indexPath)
     }
     

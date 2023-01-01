@@ -13,7 +13,7 @@ class CategoryWiseTableViewCell: UITableViewCell {
     
     static let nibName = "CategoryWiseTableViewCell"
     
-    var article = [Article]()
+    private var article = [Article]()
     
     @IBOutlet weak var cardView: UIView!
     static func getNib() -> UINib {
