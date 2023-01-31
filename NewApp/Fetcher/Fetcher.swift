@@ -43,7 +43,7 @@ class Fetcher {
         case .searchByName:
             return URL(string: "\(mainUrl)/everything?q=\(name ?? "")&apiKey=\(apiKey)")
         case .topHeadlines:
-            return URL(string: "\(mainUrl)/top-headlines?country=us&apiKey=\(apiKey)")
+            return URL(string: "\(mainUrl)/top-headlines?country=in&apiKey=\(apiKey)")
         }
     }
 }

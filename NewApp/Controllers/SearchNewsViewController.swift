@@ -72,6 +72,17 @@ extension SearchNewsViewController: UITableViewDelegate, UITableViewDataSource {
         return searchedNewsCell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //debugPrint(indexPath.row)
+        
+        let url = articles[indexPath.row].url
+        //debugPrint(url)
+        
+        guard let webViewController = storyboard?.instantiateViewController(withIdentifier: WKWebViewController.storyboardID) as? WKWebViewController else { return }
+        webViewController.setURL(url)
+        navigationController?.pushViewController(webViewController, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return searchValue
     }

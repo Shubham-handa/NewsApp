@@ -169,6 +169,7 @@ extension ViewController: CategoryWiseTableViewCellDelegate {
     func didTapItemAt(_ indexPath: IndexPath?) {
         guard let indexPath = indexPath,
               let webViewController = storyboard?.instantiateViewController(withIdentifier: WKWebViewController.storyboardID) as? WKWebViewController else { return }
+        //debugPrint(articles[indexPath.section][indexPath.row].url)
         webViewController.setURL(articles[indexPath.section][indexPath.row].url)
         navigationController?.pushViewController(webViewController, animated: true)
     }
