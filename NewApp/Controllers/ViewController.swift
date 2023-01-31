@@ -10,167 +10,167 @@ import RealmSwift
 
 class ViewController: UIViewController{
     @IBOutlet weak var newsDisplayTableView: UITableView!
-
-    private let articleDataManager: ArticleDataManager = ArticleDataManager()
-    var articlesData: [Article] = []
-    var articles = [[Article]]()
-    var addBitcoinData = false
-
+    
+    private var articles = [[Article]]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUp()
-        registerCells()
-        //
-        self.navigationItem.titleView = imageViewTitle()
-        
+        setup()
+    }
+}
+
+private extension ViewController {
+    
+    func setup() {
+        setupUI()
+        fetchData()
     }
     
-    func imageViewTitle() -> UIImageView {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 40))
-        imageView.contentMode = .scaleAspectFit
-        let image = UIImage(named: "newsIcon2")
-        imageView.image = image
-        navigationItem.titleView = imageView
-        return imageView
+    func setupUI() {
+        setupTableView()
+        navigationItem.titleView = getImageView("newsIcon2")
     }
     
-    func registerCells() {
+    func setupTableView() {
         newsDisplayTableView.delegate = self
         newsDisplayTableView.dataSource = self
-        newsDisplayTableView.register(TopHeadlinesTableViewCell.getNib(), forCellReuseIdentifier: TopHeadlinesTableViewCell.nibName)
-        newsDisplayTableView.register(CategoryWiseTableViewCell.getNib(), forCellReuseIdentifier: CategoryWiseTableViewCell.nibName)
-        newsDisplayTableView.register(CustomHeaderView.getNib(), forHeaderFooterViewReuseIdentifier: CustomHeaderView.nibName)
-        
+        newsDisplayTableView.register(TopHeadlinesTableViewCell.nib,
+                                      forCellReuseIdentifier: TopHeadlinesTableViewCell.nibName)
+        newsDisplayTableView.register(CategoryWiseTableViewCell.nib,
+                                      forCellReuseIdentifier: CategoryWiseTableViewCell.nibName)
+        newsDisplayTableView.register(CustomHeaderView.nib,
+                                      forHeaderFooterViewReuseIdentifier: CustomHeaderView.nibName)
     }
     
-    func setUp(){
-        
+    func fetchData() {
         let dispatchGroup = DispatchGroup()
+        let fetchTopHeadlinesBlockOperation = BlockOperation()
+        let fetchNewsByKeywordBlockOperation = BlockOperation()
         
-        let fetchNewsBySpecificThingBO = BlockOperation()
-        fetchNewsBySpecificThingBO.addExecutionBlock {
+        fetchNewsByKeywordBlockOperation.addExecutionBlock {
             dispatchGroup.enter()
-            Fetcher.shared.fetchBySpecificThing("bitcoin"){ articlesData in
-                self.articles.append(articlesData)
+            
+            Fetcher.shared.fetch("bitcoin", withAPIType: .searchByName) { [weak self] articles in
+                self?.articles.append(articles)
                 dispatchGroup.leave()
             }
+            
             dispatchGroup.wait()
         }
         
-        let fetchTopHeadlinesBO = BlockOperation()
-        fetchTopHeadlinesBO.addExecutionBlock {
-            Fetcher.shared.fetchTopHeadlinesParticularCountry { articlesData in
-                        self.articles.append(articlesData)
-                self.reloadTableViewData()
+        fetchTopHeadlinesBlockOperation.addExecutionBlock {
+            dispatchGroup.enter()
+            
+            Fetcher.shared.fetch(nil, withAPIType: .topHeadlines) { [weak self] articles in
+                self?.articles.append(articles)
+                self?.reloadTableView()
+                dispatchGroup.leave()
             }
+            
+            dispatchGroup.wait()
         }
         
-        fetchTopHeadlinesBO.addDependency(fetchNewsBySpecificThingBO)
+        fetchTopHeadlinesBlockOperation.addDependency(fetchNewsByKeywordBlockOperation)
         
         let operationQueue = OperationQueue()
-        operationQueue.addOperation(fetchTopHeadlinesBO)
-        operationQueue.addOperation(fetchNewsBySpecificThingBO)
-        
+        operationQueue.addOperation(fetchTopHeadlinesBlockOperation)
+        operationQueue.addOperation(fetchNewsByKeywordBlockOperation)
     }
     
-    func reloadTableViewData() {
+    func getImageView(_ named: String) -> UIImageView {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 40))
+        imageView.image = UIImage(named: named)
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }
+    
+    func reloadTableView() {
         DispatchQueue.main.async {
             self.newsDisplayTableView.reloadData()
         }
-        
     }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return articles.count
+        articles.count
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 0
-        switch section {
-        case 0: count = 1
-        case 1: count = self.articles[section].count
-        default:
-            count = 0
-        }
-        return count
+        section == 0 ? 1 : articles[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0:
-            guard let bitcoinCell = newsDisplayTableView.dequeueReusableCell(withIdentifier: CategoryWiseTableViewCell.nibName, for: indexPath) as? CategoryWiseTableViewCell else {return UITableViewCell()}
             
-            bitcoinCell.setUpData(article: articles[indexPath.section])
+        case 0:
+            guard let bitcoinCell = newsDisplayTableView.dequeueReusableCell(withIdentifier: CategoryWiseTableViewCell.nibName, for: indexPath) as? CategoryWiseTableViewCell else { return UITableViewCell() }
+            bitcoinCell.delegate = self
+            bitcoinCell.setUpData(article: articles[indexPath.section], indexPath)
             return bitcoinCell
+            
         case 1:
             guard let topHeadlineCell = newsDisplayTableView.dequeueReusableCell(withIdentifier: TopHeadlinesTableViewCell.nibName, for: indexPath) as? TopHeadlinesTableViewCell else {return UITableViewCell()}
             topHeadlineCell.delegate = self
             topHeadlineCell.setUpData(articles[indexPath.section][indexPath.row], indexPath)
             return topHeadlineCell
+            
         default:
             return UITableViewCell()
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        let urlString = self.articlesData[indexPath.row].url
-//        let url = URL(string: urlString)
-        
-        //guard let randomVC = RandomViewController els
-        let urlToLoadInWebView = articles[indexPath.section][indexPath.row].url
-        
-        if !urlToLoadInWebView.isEmpty {
-            guard let webViewController = storyboard?.instantiateViewController(withIdentifier: "WKWebViewController") as? WKWebViewController else {return}
-            webViewController.url = urlToLoadInWebView
-            self.navigationController?.pushViewController(webViewController, animated: true)
-        }
-       
-        
-        
-        
-        
-//        if let url = url {
-//            //let webViewVC = WebViewController(url: url)
-//            guard let Ran
-//            self.navigationController?.pushViewController(webViewVC, animated: true)
-//        }
+        guard let webViewController = storyboard?.instantiateViewController(withIdentifier: WKWebViewController.storyboardID) as? WKWebViewController else { return }
+        webViewController.setURL(articles[indexPath.section][indexPath.row].url)
+        navigationController?.pushViewController(webViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = newsDisplayTableView.dequeueReusableHeaderFooterView(withIdentifier: CustomHeaderView.nibName) as? CustomHeaderView else {return UIView()}
-        switch section {
-        case 0: header.headerLabel.text = "Bitcoin"
-        case 1: header.headerLabel.text = "Top Headlines"
-        default:
-            header.headerLabel.text = "Everything"
-        }
+        guard let header = newsDisplayTableView.dequeueReusableHeaderFooterView(withIdentifier: CustomHeaderView.nibName) as? CustomHeaderView else { return nil }
+        header.headerLabel.text = section == 0 ? "Bitcoint" : section == 1 ? "Top Headlines" : "Everything"
         return header
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        50
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var height: CGFloat = 370
-        if indexPath.section == 0{
-            height = 350
-        }
-        return height
+        indexPath.section == 0 ? 350 : tableView.estimatedRowHeight
     }
 }
 
 // MARK: Delegate Protocol
 extension ViewController: TopHeadlinesTVDelegate {
     
-    func sendIndexPathOfTappedNewsForSave(_ section: Int, _ row: Int) {
-        debugPrint("Section \(section) row \(row)")
-        let article = self.articles[section][row]
-        articleDataManager.saveNewsArticle(article)
-        NotificationCenter.default.post(name: Notification.Name("dataAdd"), object: nil)
+    func sendIndexPathOfTappedNews(_ type: ActionType, indexPath: IndexPath) {
+        var article = articles[indexPath.section][indexPath.row]
+        
+        switch type {
+        case .save:
+            articles[indexPath.section][indexPath.row].isBookmarked = !article.isBookmarked
+            article.isBookmarked = !article.isBookmarked
+            ArticleDataManager().saveNewsArticle(article)
+            NotificationCenter.default.post(name: Notification.Name("dataAdd"),
+                                            object: nil)
+            reloadTableView()
+        case .show:
+            guard let webViewController = storyboard?.instantiateViewController(withIdentifier: WKWebViewController.storyboardID) as? WKWebViewController else { return }
+            webViewController.setURL(article.url)
+            navigationController?.pushViewController(webViewController,
+                                                     animated: true)
+        }
+    }
+}
+
+extension ViewController: CategoryWiseTableViewCellDelegate {
+    
+    func didTapItemAt(_ indexPath: IndexPath?) {
+        guard let indexPath = indexPath,
+              let webViewController = storyboard?.instantiateViewController(withIdentifier: WKWebViewController.storyboardID) as? WKWebViewController else { return }
+        webViewController.setURL(articles[indexPath.section][indexPath.row].url)
+        navigationController?.pushViewController(webViewController, animated: true)
     }
 }
 

@@ -7,55 +7,54 @@
 
 import UIKit
 
+protocol CategoryWiseTableViewCellDelegate: AnyObject {
+    func didTapItemAt(_ indexPath: IndexPath?)
+}
+
 class CategoryWiseTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cwNewsCollectionView: UICollectionView!
-    
-    static let nibName = "CategoryWiseTableViewCell"
-    
-    private var article = [Article]()
-    
     @IBOutlet weak var cardView: UIView!
-    static func getNib() -> UINib {
-        return UINib(nibName: nibName, bundle: nil)
-    }
-
+    
+    weak var delegate: CategoryWiseTableViewCellDelegate?
+    private var article = [Article]()
+    private var indexPathOfData: IndexPath = []
+   
+    static let nibName = "CategoryWiseTableViewCell"
+    static let nib: UINib = { UINib(nibName: nibName, bundle: nil) }()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        registerCells()
+        setupCollectionView()
+
+    }
+    
+    func setupCollectionView() {
         cwNewsCollectionView.delegate = self
         cwNewsCollectionView.dataSource = self
-        //self.cardView.layer.cornerRadius = 30
-        //self.cwNewsCollectionView.layer.cornerRadius = 20
-
+        cwNewsCollectionView.register(GenericCollectionViewCell.nib, forCellWithReuseIdentifier: GenericCollectionViewCell.nibName)
     }
     
-    
-    func registerCells() {
-        cwNewsCollectionView.register(GenericCollectionViewCell.getUINib(), forCellWithReuseIdentifier: GenericCollectionViewCell.nibName)
-    }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }
     
-    func setUpData(article: [Article]) {
+    func setUpData(article: [Article], _ indexPath: IndexPath) {
+        self.indexPathOfData = indexPath
         self.article = article
         self.cwNewsCollectionView.reloadData()
     }
-    
 }
 
 extension CategoryWiseTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.article.count
+        article.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let cell = cwNewsCollectionView.dequeueReusableCell(withReuseIdentifier: GenericCollectionViewCell.nibName, for: indexPath) as? GenericCollectionViewCell else {
             return UICollectionViewCell()
         }
@@ -63,13 +62,13 @@ extension CategoryWiseTableViewCell: UICollectionViewDelegate, UICollectionViewD
         return cell
     }
     
-
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
                         UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        return CGSize(width: 300, height: 350) // Collection View size right?
-
+        CGSize(width: 300, height: 350)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didTapItemAt(indexPath)
     }
     
 }

@@ -19,10 +19,13 @@ class SavedNewsTableViewCell: UITableViewCell {
     @IBOutlet weak var newsPublishedAtLV: UILabel!
     @IBOutlet weak var newsTitleLV: UILabel!
     @IBOutlet weak var newsIV: UIImageView!
-    weak var delegate:SavedNewsTableViewDelegate?
-    var indexPath: IndexPath = []
+    
     static let nibName = "SavedNewsTableViewCell"
-    var index:Int = 0
+
+    weak var delegate: SavedNewsTableViewDelegate?
+
+    private var indexPath: IndexPath = []
+    private var index = 0
     
     static func getNib() -> UINib {
         return UINib(nibName: nibName, bundle: nil)
@@ -31,20 +34,7 @@ class SavedNewsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.cardView.layer.cornerRadius = 24
-        self.cardView.clipsToBounds = true
-        newsIV.clipsToBounds = true
-        
-        
-        //Option Button setup
-        let menuClosure = {(action: UIAction) in
-            self.update(option: action.title)
-        }
-        optionButton.menu = UIMenu(title: "", children: [
-            UIAction(title: "Delete",image: UIImage(systemName: "delete.left.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal), handler: menuClosure)
-        ])
-        optionButton.showsMenuAsPrimaryAction = true
-        
+        setup()
     }
     
     func update(option:String) {
@@ -59,14 +49,36 @@ class SavedNewsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setUpData(_ article: ArticleDBModel, index: Int){
-        self.index = index
-        newsPublishedAtLV.text = findTime(article.publishedAt)
-        newsTitleLV.text = article.title
-        newsIV.sd_setImage(with: URL(string: article.urlToImage), placeholderImage: UIImage(systemName: "slowmo"), options: .continueInBackground, completed: nil)
+    private func setup() {
+        cardView.layer.cornerRadius = 24
+        
+        newsIV.clipsToBounds = true
+        cardView.clipsToBounds = true
+        
+        let menuClosure = {(action: UIAction) in
+            self.update(option: action.title)
+        }
+        
+        optionButton.menu = UIMenu(title: "",
+                                   children: [
+                                    UIAction(title: "Delete",
+                                             image: UIImage(systemName: "delete.left.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal),
+                                             handler: menuClosure)
+                                   ])
+        optionButton.showsMenuAsPrimaryAction = true
     }
     
-    @IBAction func moreButton(_ sender: UIButton) {
+    func setUpData(_ article: ArticleDBModel, index: Int){
+        self.index = index
+
+        newsTitleLV.text = article.title
+        newsPublishedAtLV.text = findTime(article.publishedAt)
         
+        newsIV.sd_setImage(with: URL(string: article.urlToImage),
+                           placeholderImage: UIImage(systemName: "slowmo"),
+                           options: .continueInBackground,
+                           completed: nil)
     }
+    
+    
 }

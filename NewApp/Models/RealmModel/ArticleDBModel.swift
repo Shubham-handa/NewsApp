@@ -17,6 +17,7 @@ class ArticleDBModel: Object {
     @objc dynamic var urlToImage: String = ""
     @objc dynamic var publishedAt: String = ""
     @objc dynamic var content: String = ""
+    @objc dynamic var isBookmarked: Bool = false
 }
 
 class SourceDBModel: Object {

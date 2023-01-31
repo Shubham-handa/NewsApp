@@ -12,14 +12,22 @@ class WKWebViewController: UIViewController {
 
     @IBOutlet weak var webView: WKWebView!
     
-    var url: String = ""
+    private var url: String?
+    static let storyboardID = "CustomWebViewViewController"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Boring News"
-        self.tabBarController?.tabBar.isHidden = true
-        // Do any additional setup after loading the view.
-        guard let urlToLoad = URL(string: self.url) else {return}
-        webView.load(URLRequest(url: urlToLoad))
+        guard let url = url else { return }
+        loadWebPage(url)
+    }
+    
+    func setURL(_ url: String?) {
+        self.url = url
+    }
+    
+    
+    private func loadWebPage(_ url: String) {
+        guard let url = URL(string: url) else { return }
+        webView.load(URLRequest(url: url))
     }
 }

@@ -9,76 +9,49 @@ import Foundation
 
 class ArticlesApiModel {
     var articles: [Article] = []
-    var sourceFromArticle: Source? = nil
     
     init(_ articles: [AnyHashable]) {
+        
         for article in articles {
-            guard let article = article as? [AnyHashable: Any] else {
-                continue
-            }
-            if let source = article["source"] as? [String: String] {
-                sourceData(source)
-            }
-            let newArticle = getArticleObject(article)
+            guard let article = article as? [AnyHashable: Any],
+                  let source = article[NewAPIKeys.source.rawValue] as? [String: String] else { continue }
+            
+            let newArticle = getArticleObject(article, source: getSource(source))
             self.articles.append(newArticle)
         }
     }
 }
 
-
-extension ArticlesApiModel {
-    func sourceData(_ source: [String: String]) {
+private extension ArticlesApiModel {
+    
+    func getSource(_ source: [String: String]) -> Source {
         var sourceId = ""
         var sourceName = ""
-
-        guard let id = source[NewAPIKeys.id.rawValue] else {return}
-        guard let name = source[NewAPIKeys.name.rawValue] else {return}
         
-        if !id.isEmpty {
+        if let id = source[NewAPIKeys.id.rawValue], !id.isEmpty {
             sourceId = id
         }
         
-        if !name.isEmpty {
+        if let name = source[NewAPIKeys.name.rawValue], !name.isEmpty {
             sourceName = name
         }
         
-        let newSourceObject = Source(id: sourceId, name: sourceName)
-        self.sourceFromArticle = newSourceObject
+        return Source(id: sourceId, name: sourceName)
     }
     
-    func getArticleObject(_ article: [AnyHashable: Any]) -> Article {
-        
-        var newArticle = Article()
-
-        let title = returnValueUsingKeyFromDict(NewAPIKeys.title.rawValue, article)
-        let author = returnValueUsingKeyFromDict(NewAPIKeys.author.rawValue, article)
-        let description = returnValueUsingKeyFromDict(NewAPIKeys.description.rawValue, article)
-        let url = returnValueUsingKeyFromDict(NewAPIKeys.url.rawValue, article)
-        let urlToImage = returnValueUsingKeyFromDict(NewAPIKeys.urlToImage.rawValue, article)
-        let publishedAt = returnValueUsingKeyFromDict(NewAPIKeys.publishedAt.rawValue, article)
-        let content = returnValueUsingKeyFromDict(NewAPIKeys.content.rawValue, article)
- 
-        if let sourceOfArticle = sourceFromArticle {
-            //newArticle
-            newArticle.source = sourceOfArticle
-            newArticle.author = author
-            newArticle.title = title
-            newArticle.description = description
-            newArticle.url = url
-            newArticle.urlToImage = urlToImage
-            newArticle.publishedAt = publishedAt
-            newArticle.content = content
-        }
-        
-        return newArticle
+    func getArticleObject(_ article: [AnyHashable: Any], source: Source) -> Article {
+        return Article(source: source,
+                       author: getValue(NewAPIKeys.author.rawValue, article),
+                       title: getValue(NewAPIKeys.title.rawValue, article),
+                       description: getValue(NewAPIKeys.description.rawValue, article),
+                       url: getValue(NewAPIKeys.url.rawValue, article),
+                       urlToImage: getValue(NewAPIKeys.urlToImage.rawValue, article),
+                       publishedAt:  getValue(NewAPIKeys.publishedAt.rawValue, article),
+                       content: getValue(NewAPIKeys.content.rawValue, article))
     }
     
-    func returnValueUsingKeyFromDict(_ key: String, _ article: [AnyHashable: Any]) -> String {
-        guard let value = article[key] as? String else {return ""}
-        if value.isEmpty {
-            return ""
-        }
-        return value
+    func getValue(_ key: String, _ article: [AnyHashable: Any]) -> String {
+        return article[key] as? String ?? ""
     }
 }
 
@@ -95,7 +68,7 @@ enum NewAPIKeys: String {
     case name
 }
 
-class Article {
+struct Article {
     var source: Source? = nil
     var author: String = ""
     var title: String = ""
@@ -104,12 +77,10 @@ class Article {
     var urlToImage: String = ""
     var publishedAt: String = ""
     var content: String = ""
-    
-    init () {
-    }
+    var isBookmarked: Bool = false
 }
 
 struct Source {
-    var id: String = ""
-    var name: String = ""
+    var id: String
+    var name: String
 }

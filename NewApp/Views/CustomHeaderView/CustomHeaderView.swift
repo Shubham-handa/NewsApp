@@ -12,11 +12,7 @@ class CustomHeaderView: UITableViewHeaderFooterView {
     @IBOutlet weak var headerLabel: UILabel!
     
     static let nibName = "CustomHeaderView"
-    
-    static func getNib() -> UINib {
-        return UINib(nibName: nibName, bundle: nil)
-    }
-    
+    static let nib: UINib = { UINib(nibName: nibName, bundle: nil) }()
     
     /*
     // Only override draw() if you perform custom drawing.

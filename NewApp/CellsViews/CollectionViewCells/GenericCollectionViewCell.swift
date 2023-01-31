@@ -14,11 +14,9 @@ class GenericCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var newsImageView: UIImageView!
     @IBOutlet weak var newsPublishedAt: UILabel!
     @IBOutlet weak var cardView: UIView!
-    static let nibName = "GenericCollectionViewCell"
     
-    static func getUINib() -> UINib {
-        return UINib(nibName: nibName, bundle: nil)
-    }
+    static let nibName = "GenericCollectionViewCell"
+    static let nib: UINib = { UINib(nibName: nibName, bundle: nil) }()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,13 +29,13 @@ class GenericCollectionViewCell: UICollectionViewCell {
     
     func setUpData(_ article: Article) {
         //debugPrint(article)
-        newsPublishedAt.text = findTime(article.publishedAt)
-        if article.author.isEmpty {
-            article.author = "Random"
-        }
-        newsAuthorLabel.text = article.author
         newsTitleLabel.text = article.title
-        newsImageView.sd_setImage(with: URL(string: article.urlToImage), placeholderImage: UIImage(systemName: "slowmo"), options: .continueInBackground, completed: nil)
+        newsPublishedAt.text = findTime(article.publishedAt)
+        newsAuthorLabel.text = article.author.isEmpty ? "Random" : article.author
+        newsImageView.sd_setImage(with: URL(string: article.urlToImage),
+                                  placeholderImage: UIImage(systemName: "slowmo"),
+                                  options: .continueInBackground,
+                                  completed: nil)
     }
     
 

@@ -42,7 +42,7 @@
         <!--Web View Controller-->
         <scene sceneID="CQU-4E-8oC">
             <objects>
-                <viewController storyboardIdentifier="WKWebViewController" id="95g-M9-3hD" customClass="WKWebViewController" customModule="NewApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CustomWebViewViewController" id="95g-M9-3hD" customClass="WKWebViewController" customModule="NewApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r0V-g2-uQS">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

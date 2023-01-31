@@ -35,13 +35,12 @@ class SearchingNewsTableViewCell: UITableViewCell {
     
     func setUpData(_ article: Article,_ index: Int) {
         self.index = index
-        if article.source?.name.count == 0 {
-            sourceViewLabel.text = "Unknown"
-        }else {
-            sourceViewLabel.text = article.source?.name
-        }
         titleViewLabel.text = article.title
-        searchedNewsImageView.sd_setImage(with: URL(string: article.urlToImage), placeholderImage: UIImage(systemName: "slowmo"), options: .continueInBackground, completed: nil)
+        sourceViewLabel.text = article.source?.name.count == 0 ? "Unknown" : article.source?.name
+        searchedNewsImageView.sd_setImage(with: URL(string: article.urlToImage),
+                                          placeholderImage: UIImage(systemName: "slowmo"),
+                                          options: .continueInBackground,
+                                          completed: nil)
     }
     
 }
