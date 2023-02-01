@@ -66,6 +66,7 @@ class TopHeadlinesTableViewCell: UITableViewCell {
         bookmarkedBtnOutlet.setImage(UIImage(systemName: article.isBookmarked ? "bookmark.fill" : "bookmark"),
                                    for: .normal)
         newsPublishedTime.text = findTime(article.publishedAt)
+       // debugPrint("News Published Time \(newsPublishedTime.text)")
         newsImageView.sd_setImage(with: URL(string: article.urlToImage),
                                   placeholderImage: UIImage(systemName: "slowmo"),
                                   options: .continueInBackground,

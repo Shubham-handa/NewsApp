@@ -9,45 +9,55 @@ import Foundation
 
 func findTime(_ publishedAt: String) -> String {
     var resultedTime = ""
+   
+    let mytime = Date()
+    resultedTime = formatDateAndGetResult(publishedAt, mytime)
     
-    //debugPrint("Date new publishedAt \(publishedAt)")
-    //Date Foramting of publishedDate of News coming from api
+   
+    //debugPrint(resultedTime)
+    
+    return resultedTime
+}
+
+func formatDateAndGetResult(_ value: String,_ currentTime: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-    let result = dateFormatter.date(from: publishedAt)
+    
+    let parsedPublishedDateIntoDataObject = dateFormatter.date(from: value)
+    
     dateFormatter.dateFormat = "HH"
     dateFormatter.timeZone = TimeZone(identifier: "UTC")
-    var publishedTime = ""
-    if let str = result {
-        publishedTime = dateFormatter.string(from: str)
+    
+    var resultedPublishedDateHours = ""
+    
+    if let publishedDate = parsedPublishedDateIntoDataObject {
+        resultedPublishedDateHours = dateFormatter.string(from: publishedDate)
     }
     
-    //Date Formating of current date
-    let mytime = Date()
-    let currentDateForMatter = DateFormatter()
-    //print(mytime)
-    dateFormatter.dateFormat = "HH"
-    let currentResult = dateFormatter.string(from: mytime)
-    //debugPrint("current Date \(currentResult)")
+    //dateFormatter.dateFormat = "HH"
+    let resultedCurrentDateHours = dateFormatter.string(from: currentTime)
     
-    //Change to int
-    var d1 = 0
-    if let first = Int(publishedTime) {
-        d1 = first
-    }
-    var d2 = 0
-    if let first = Int(currentResult) {
-        d2 = first
-    }
-    let final = abs(d1 - d2)
-    //debugPrint("Final \(final)")
+    
+    
+    return finalResult(changeToInt(resultedPublishedDateHours), changeToInt(resultedCurrentDateHours))
+}
+
+func changeToInt(_ value: String) -> Int {
+    guard let hours = Int(value) else {return 0}
+    return hours
+}
+
+func finalResult(_ v1: Int, _ v2: Int) -> String {
+    let final = abs(v1 - v2)
+    var resultedTime = ""
+   
     
     if final > 23 {
-        resultedTime = "1D ago"
-    }
-    else {
+        resultedTime = "Few Days Ago"
+    } else if final <= 0 {
+        resultedTime = "Few Minutes Ago"
+    } else {
         resultedTime = "\(final)h ago"
     }
-    
     return resultedTime
 }

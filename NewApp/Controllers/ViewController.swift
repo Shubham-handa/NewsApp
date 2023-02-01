@@ -128,7 +128,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = newsDisplayTableView.dequeueReusableHeaderFooterView(withIdentifier: CustomHeaderView.nibName) as? CustomHeaderView else { return nil }
-        header.headerLabel.text = section == 0 ? "Bitcoint" : section == 1 ? "Top Headlines" : "Everything"
+        header.headerLabel.text = section == 0 ? "Bitcoin" : section == 1 ? "Top Headlines" : "Everything"
         return header
     }
     
